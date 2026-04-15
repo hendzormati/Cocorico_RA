@@ -1,0 +1,55 @@
+{
+  "tomate": {
+    "nom": "Tomate",
+    "emoji": "🍅",
+    "origine": "Originaire d'Amérique du Sud, cultivée mondialement.",
+    "calories": "18 kcal / 100g",
+    "proteines": "0.9g",
+    "glucides": "3.9g",
+    "conservation": "À température ambiante, 5 à 7 jours. Éviter le réfrigérateur.",
+    "quiz": [
+      {
+        "question": "Combien de calories pour 100g de tomate ?",
+        "choices": ["18 kcal", "85 kcal", "45 kcal"],
+        "correct": 0
+      },
+      {
+        "question": "D'où vient la tomate ?",
+        "choices": ["Europe", "Amérique du Sud", "Asie"],
+        "correct": 1
+      }
+    ]
+  },
+  "banane": {
+    "nom": "Banane",
+    "emoji": "🍌",
+    "origine": "Originaire d'Asie du Sud-Est, cultivée en zone tropicale.",
+    "calories": "89 kcal / 100g",
+    "proteines": "1.1g",
+    "glucides": "23g",
+    "conservation": "À température ambiante, 4 à 5 jours.",
+    "quiz": [
+      {
+        "question": "Combien de calories pour 100g de banane ?",
+        "choices": ["45 kcal", "89 kcal", "120 kcal"],
+        "correct": 1
+      }
+    ]
+  },
+  "brocoli": {
+    "nom": "Brocoli",
+    "emoji": "🥦",
+    "origine": "Originaire d'Italie, très cultivé en Europe et Amérique.",
+    "calories": "34 kcal / 100g",
+    "proteines": "2.8g",
+    "glucides": "7g",
+    "conservation": "Au réfrigérateur, 3 à 5 jours.",
+    "quiz": [
+      {
+        "question": "Où conserver le brocoli ?",
+        "choices": ["Température ambiante", "Réfrigérateur", "Congélateur"],
+        "correct": 1
+      }
+    ]
+  }
+}
