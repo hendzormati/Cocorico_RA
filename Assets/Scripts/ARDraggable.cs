@@ -7,89 +7,152 @@ public class ARDraggable : MonoBehaviour
 {
     Camera cam;
     bool dragging;
-    Vector2 startTouch;
-    Transform trackedImageTransform;
+
     ARTrackedImage trackedImage;
     string imageName;
+
+    Vector2 lastTouchPos;
+
+    [Header("Scale")]
+    [SerializeField] float minScale = 1f;
+    [SerializeField] float maxScale = 3.5f;
+
+    float initialPinchDistance;
+    Vector3 initialScale;
+    Transform visual;
 
     void Start()
     {
         cam = Camera.main;
-        // find parent tracked image (we expect prefab is parented to ARTrackedImage)
+
         trackedImage = GetComponentInParent<ARTrackedImage>();
+
         if (trackedImage != null)
         {
-            trackedImageTransform = trackedImage.transform;
             imageName = trackedImage.referenceImage.name;
+
+            transform.localPosition = Vector3.zero;
+
+            transform.localPosition += new Vector3(0, 0, 0.02f);
+
+            transform.localScale = Vector3.one;
+
+            Debug.Log($"[Tracking] {imageName} forced to center");
+        }
+        visual = transform.Find("VisualCenter");
+
+        if (visual == null)
+        {
+            Debug.LogWarning("VisualCenter not found, using root");
+            visual = transform;
         }
     }
 
     void Update()
     {
-        if (Input.touchCount == 0)
+        if (cam == null || trackedImage == null) return;
+
+        if (Input.touchCount == 2)
         {
-            // support mouse for editor
-            if (Input.GetMouseButtonUp(0) && dragging) EndDrag();
-            if (Input.GetMouseButton(0) && dragging) DragTo(Input.mousePosition);
-            if (Input.GetMouseButtonDown(0)) TryBeginDrag(Input.mousePosition);
+            Touch t0 = Input.GetTouch(0);
+            Touch t1 = Input.GetTouch(1);
+
+            float dist = Vector2.Distance(t0.position, t1.position);
+
+            if (t1.phase == TouchPhase.Began)
+            {
+                initialPinchDistance = dist;
+                initialScale = transform.localScale;
+            }
+            else
+            {
+                float factor = Mathf.Pow(dist / initialPinchDistance, 1.2f);
+
+                float scale = Mathf.Clamp(
+                    initialScale.x * factor,
+                    minScale,
+                    maxScale
+                );
+
+                transform.localScale = Vector3.one * scale;
+            }
+
             return;
         }
 
-        Touch t = Input.GetTouch(0);
-        if (t.phase == TouchPhase.Began) TryBeginDrag(t.position);
-        else if ((t.phase == TouchPhase.Moved || t.phase == TouchPhase.Stationary) && dragging) DragTo(t.position);
-        else if (t.phase == TouchPhase.Ended && dragging) EndDrag();
-    }
+        if (Input.touchCount == 0)
+        {
+            if (Input.GetMouseButtonDown(0)) BeginDrag(Input.mousePosition);
+            if (Input.GetMouseButton(0) && dragging) Drag(Input.mousePosition);
+            if (Input.GetMouseButtonUp(0)) dragging = false;
+            return;
+        }
 
-    void TryBeginDrag(Vector2 screenPos)
+
+        Touch t = Input.GetTouch(0);
+
+        if (t.phase == TouchPhase.Began)
+            BeginDrag(t.position);
+        else if (t.phase == TouchPhase.Moved && dragging)
+            Drag(t.position);
+        else if (t.phase == TouchPhase.Ended)
+            dragging = false;
+    }
+    void LateUpdate()
     {
-        var ray = cam.ScreenPointToRay(screenPos);
+        if (cam == null || visual == null) return;
+
+        Vector3 direction = visual.position - cam.transform.position;
+
+        visual.rotation = Quaternion.LookRotation(direction);
+
+        visual.Rotate(0, 180f, 0);
+    }
+    void BeginDrag(Vector2 screenPos)
+    {
+        if (EventSystem.current != null &&
+            EventSystem.current.IsPointerOverGameObject(
+                Input.touchCount > 0 ? Input.GetTouch(0).fingerId : -1))
+            return;
+
+        Ray ray = cam.ScreenPointToRay(screenPos);
+
         if (Physics.Raycast(ray, out var hit))
         {
-            if (hit.collider != null && hit.collider.gameObject == gameObject)
+            if (hit.collider.GetComponentInParent<ARDraggable>() == this)
             {
                 dragging = true;
-                startTouch = screenPos;
-                // ensure we are parented to the tracked image
-                if (trackedImageTransform == null)
-                {
-                    trackedImage = GetComponentInParent<ARTrackedImage>();
-                    if (trackedImage) trackedImageTransform = trackedImage.transform;
-                }
+                lastTouchPos = screenPos;
             }
         }
     }
 
-    void DragTo(Vector2 screenPos)
-    {
-        if (cam == null || trackedImageTransform == null) return;
+    [SerializeField] float dragSensitivity = 0.0020f;
 
-        // Plane defined by the tracked image (normal = trackedImage.forward)
-        Plane imagePlane = new Plane(trackedImageTransform.forward, trackedImageTransform.position);
-        Ray ray = cam.ScreenPointToRay(screenPos);
-        if (imagePlane.Raycast(ray, out float enter))
-        {
-            Vector3 worldPoint = ray.GetPoint(enter);
-            // Set world pos then compute local to parent so we stay attached properly
-            transform.position = worldPoint;
-            transform.SetParent(trackedImageTransform, true);
-            // optional: keep prefab orientation facing camera or original rotation
-            // transform.localRotation = Quaternion.identity;
-        }
+    void Drag(Vector2 screenPos)
+    {
+        Vector2 delta = screenPos - lastTouchPos;
+        lastTouchPos = screenPos;
+        Vector3 right = cam.transform.right;
+        Vector3 up = cam.transform.up;
+        Vector3 move =
+            (right * delta.x + up * delta.y) *
+            dragSensitivity;
+
+        transform.position += move;
+
+        ClampToCameraView();
     }
 
-    void EndDrag()
+    void ClampToCameraView()
     {
-        dragging = false;
-        // save final local position for this image so you can reuse it next time
-        if (trackedImage != null)
-        {
-            Vector3 localPos = transform.localPosition;
-            PlayerPrefs.SetFloat(imageName + "_pos_x", localPos.x);
-            PlayerPrefs.SetFloat(imageName + "_pos_y", localPos.y);
-            PlayerPrefs.SetFloat(imageName + "_pos_z", localPos.z);
-            PlayerPrefs.Save();
-            Debug.Log($"Saved position for {imageName}: {localPos}");
-        }
+        Vector3 pos = transform.position;
+
+        Vector3 viewPos = cam.WorldToViewportPoint(pos);
+
+        viewPos.x = Mathf.Clamp(viewPos.x, 0.05f, 0.95f);
+        viewPos.y = Mathf.Clamp(viewPos.y, 0.05f, 0.95f);
+
+        transform.position = cam.ViewportToWorldPoint(viewPos);
     }
 }

@@ -5,11 +5,10 @@ using UnityEngine.XR.ARSubsystems;
 
 public class ImageTrackingHandler : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject cardPrefab;
+    [SerializeField] private GameObject cardPrefab;
 
     private ARTrackedImageManager _imageManager;
-    private Dictionary<string, GameObject> _spawnedObjects = new Dictionary<string, GameObject>();
+    private Dictionary<string, GameObject> _spawnedCards = new Dictionary<string, GameObject>();
 
     void Awake()
     {
@@ -35,79 +34,79 @@ public class ImageTrackingHandler : MonoBehaviour
         foreach (var trackedImage in eventArgs.added)
         {
             string imageName = trackedImage.referenceImage.name;
-            Debug.Log($"Image detected: {imageName}");
-            
-            // Log image position, rotation, and size
-            Debug.Log($"  Image Position: {trackedImage.transform.position}");
-            Debug.Log($"  Image Rotation: {trackedImage.transform.rotation.eulerAngles}");
-            Debug.Log($"  Image Size: {trackedImage.size}");
-            Debug.Log($"  Image Scale: {trackedImage.transform.localScale}");
+            Debug.Log($"[Tracking] Added: {imageName}");
 
-            if (!_spawnedObjects.ContainsKey(imageName) && cardPrefab)
+            if (_spawnedCards.ContainsKey(imageName))
             {
-                GameObject go = Instantiate(cardPrefab, trackedImage.transform);
-                go.transform.localRotation = Quaternion.Euler(-90f, 180f, 0f);
+                Destroy(_spawnedCards[imageName]);
+                _spawnedCards.Remove(imageName);
+            }
 
-                // Find VisualCenter
-                Transform marker = go.transform.Find("VisualCenter");
-                if (marker != null)
+            if (!cardPrefab) continue;
+
+            GameObject card = Instantiate(cardPrefab, trackedImage.transform);
+            card.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+
+            Transform marker = card.transform.Find("VisualCenter");
+            if (marker != null)
+            {
+                Vector3 markerLocal = card.transform.InverseTransformPoint(marker.position);
+                card.transform.localPosition = -markerLocal;
+            }
+            else
+            {
+                card.transform.localPosition = Vector3.zero;
+            }
+            Debug.Log($"[Tracking] VisualCenter  : {marker.position}");
+            if (PlayerPrefs.HasKey(imageName + "_pos_x"))
+            {
+                float x = PlayerPrefs.GetFloat(imageName + "_pos_x");
+                float y = PlayerPrefs.GetFloat(imageName + "_pos_y");
+                float z = PlayerPrefs.GetFloat(imageName + "_pos_z");
+
+                Vector3 savedLocal = new Vector3(x, y, z);
+
+                const float MAX_VALID_OFFSET = 1.5f;
+
+                if (savedLocal.magnitude <= MAX_VALID_OFFSET)
                 {
-                    Vector3 markerLocal = go.transform.InverseTransformPoint(marker.position);
-                    go.transform.localPosition = -markerLocal;
+                    card.transform.localPosition = savedLocal;
+                    Debug.Log($"[Tracking] Restored valid position for {imageName}: {savedLocal}");
                 }
                 else
                 {
-                    go.transform.localPosition = Vector3.zero;
-                }
-                go.SetActive(true);
-                _spawnedObjects[imageName] = go;
-                
-                // Log card position after spawning
-                Debug.Log($"Card spawned for: {imageName}");
-                Debug.Log($"  Card World Position: {go.transform.position}");
-                Debug.Log($"  Card Local Position: {go.transform.localPosition}");
-                Debug.Log($"  Card World Scale: {go.transform.lossyScale}");
-                Debug.Log($"  Card Parent: {go.transform.parent.name}");
-                
-                // Log Canvas info if it has one
-                Canvas canvas = go.GetComponent<Canvas>();
-                if (canvas)
-                {
-                    Debug.Log($"  Canvas Render Mode: {canvas.renderMode}");
-                    Debug.Log($"  Canvas World Camera: {canvas.worldCamera}");
-                }
-
-                // after Instantiate and parent (example inside OnTrackedImagesChanged)
-                string keyX = imageName + "_pos_x";
-                if (PlayerPrefs.HasKey(keyX))
-                {
-                    float x = PlayerPrefs.GetFloat(imageName + "_pos_x");
-                    float y = PlayerPrefs.GetFloat(imageName + "_pos_y");
-                    float z = PlayerPrefs.GetFloat(imageName + "_pos_z");
-                    go.transform.localPosition = new Vector3(x, y, z);
+                    PlayerPrefs.DeleteKey(imageName + "_pos_x");
+                    PlayerPrefs.DeleteKey(imageName + "_pos_y");
+                    PlayerPrefs.DeleteKey(imageName + "_pos_z");
+                    PlayerPrefs.Save();
+                    Debug.LogWarning($"[Tracking] Discarded corrupted saved position for {imageName}: {savedLocal}");
                 }
             }
+
+            card.SetActive(true);
+            _spawnedCards[imageName] = card;
+            Debug.Log($"[Tracking] Card spawned for: {imageName}");
+            Debug.Log($"[Tracking] {imageName} trackedImage world pos: {trackedImage.transform.position}");
+            Debug.Log($"[Tracking] {imageName} card local pos after spawn: {card.transform.localPosition}");
         }
 
         foreach (var trackedImage in eventArgs.updated)
         {
             string imageName = trackedImage.referenceImage.name;
-            if (_spawnedObjects.ContainsKey(imageName))
-            {
-                bool isTracking = trackedImage.trackingState == TrackingState.Tracking;
-                _spawnedObjects[imageName].SetActive(isTracking);
-            }
+            if (!_spawnedCards.ContainsKey(imageName)) continue;
+
+            bool isTracking = trackedImage.trackingState == TrackingState.Tracking;
+            _spawnedCards[imageName].SetActive(isTracking);
         }
 
         foreach (var trackedImage in eventArgs.removed)
         {
             string imageName = trackedImage.referenceImage.name;
-            if (_spawnedObjects.ContainsKey(imageName))
-            {
-                Destroy(_spawnedObjects[imageName]);
-                _spawnedObjects.Remove(imageName);
-                Debug.Log($"Card destroyed for: {imageName}");
-            }
+            if (!_spawnedCards.ContainsKey(imageName)) continue;
+
+            Destroy(_spawnedCards[imageName]);
+            _spawnedCards.Remove(imageName);
+            Debug.Log($"[Tracking] Card destroyed for: {imageName}");
         }
     }
 }

@@ -1,0 +1,226 @@
+{
+  "foods": [
+    {
+      "id": "pomme",
+      "data": {
+        "nom": "Pomme",
+        "emoji": "🍎",
+        "categorie": "Fruit",
+        "type": "sain",
+        "nutriscore": "A",
+        "calories": "52 kcal / 100g",
+        "sucres": "10g",
+        "fibres": "2.4g",
+        "additifs": "Aucun",
+        "message_court": "Riche en fibres et vitamines naturelles ",
+        "origine": "Originaire d'Asie Centrale, cultivée dans les régions tempérées.",
+        "conservation": "Au réfrigérateur, 4 à 6 semaines.",
+        "quiz": [
+          {
+            "question": "Quel est le Nutri-Score de la pomme ?",
+            "choices": [
+              "A",
+              "C",
+              "E"
+            ],
+            "correct": 0
+          },
+          {
+            "question": "Combien de sucres pour 100g de pomme ?",
+            "choices": [
+              "25g",
+              "10g",
+              "0g"
+            ],
+            "correct": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "barre_chocolatee",
+      "data": {
+        "nom": "Barre Chocolatée",
+        "emoji": "🍫",
+        "categorie": "Snack",
+        "type": "transforme",
+        "nutriscore": "E",
+        "calories": "480 kcal / 100g",
+        "sucres": "54g",
+        "fibres": "0.5g",
+        "additifs": "E471, E476, arômes artificiels",
+        "message_court": "Très riche en sucres et graisses saturées ",
+        "origine": "Produit ultra-transformé industriel.",
+        "conservation": "Plusieurs mois à température ambiante.",
+        "quiz": [
+          {
+            "question": "Combien de calories pour 100g de barre chocolatée ?",
+            "choices": [
+              "52 kcal",
+              "480 kcal",
+              "150 kcal"
+            ],
+            "correct": 1
+          },
+          {
+            "question": "Que signifie E471 ?",
+            "choices": [
+              "Un colorant naturel",
+              "Un émulsifiant de synthèse",
+              "Une vitamine"
+            ],
+            "correct": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "eau",
+      "data": {
+        "nom": "Eau",
+        "emoji": "💧",
+        "categorie": "Boisson",
+        "type": "sain",
+        "nutriscore": "A",
+        "calories": "0 kcal",
+        "sucres": "0g",
+        "fibres": "0g",
+        "additifs": "Aucun",
+        "message_court": "La boisson parfaite, zéro calorie ",
+        "origine": "Source naturelle.",
+        "conservation": "Indéfiniment en bouteille fermée.",
+        "quiz": [
+          {
+            "question": "Combien de calories dans l'eau ?",
+            "choices": [
+              "0 kcal",
+              "10 kcal",
+              "50 kcal"
+            ],
+            "correct": 0
+          },
+          {
+            "question": "Combien de verres d'eau par jour ?",
+            "choices": [
+              "3",
+              "6",
+              "8"
+            ],
+            "correct": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "jus_sucre",
+      "data": {
+        "nom": "Jus de Fruit Industriel",
+        "emoji": "🧃",
+        "categorie": "Boisson",
+        "type": "transforme",
+        "nutriscore": "C",
+        "calories": "45 kcal / 100ml",
+        "sucres": "10g",
+        "fibres": "0g",
+        "additifs": "Arômes, conservateurs E202",
+        "message_court": "Contient autant de sucre qu'un soda ",
+        "origine": "Produit industriel à base de concentré.",
+        "conservation": "6 à 12 mois fermé, 3 jours ouvert.",
+        "quiz": [
+          {
+            "question": "Un jus industriel contient-il des additifs ?",
+            "choices": [
+              "Non",
+              "Oui souvent",
+              "Seulement bio"
+            ],
+            "correct": 1
+          },
+          {
+            "question": "Nutri-Score du jus ?",
+            "choices": [
+              "A",
+              "C",
+              "E"
+            ],
+            "correct": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "pain_complet",
+      "data": {
+        "nom": "Pain Complet",
+        "emoji": "🍞",
+        "categorie": "Féculent",
+        "type": "sain",
+        "nutriscore": "B",
+        "calories": "247 kcal / 100g",
+        "sucres": "2g",
+        "fibres": "6.5g",
+        "additifs": "Aucun",
+        "message_court": "Riche en fibres, rassasiant et nutritif ",
+        "origine": "Farine complète de blé.",
+        "conservation": "2 à 3 jours à température ambiante.",
+        "quiz": [
+          {
+            "question": "Pourquoi le pain complet est-il meilleur que le pain blanc ?",
+            "choices": [
+              "Il contient plus de sucre",
+              "Il est plus riche en fibres",
+              "Il a moins de calories"
+            ],
+            "correct": 1
+          },
+          {
+            "question": "Quel est le Nutri-Score du pain complet ?",
+            "choices": [
+              "A",
+              "B",
+              "D"
+            ],
+            "correct": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "croissant",
+      "data": {
+        "nom": "Croissant",
+        "emoji": "🥐",
+        "categorie": "Féculent",
+        "type": "transforme",
+        "nutriscore": "D",
+        "calories": "406 kcal / 100g",
+        "sucres": "10g",
+        "fibres": "0.9g",
+        "additifs": "E471, arômes",
+        "message_court": "Riche en graisses saturées, pauvre en fibres ",
+        "origine": "Viennoiserie industrielle à base de beurre et farine blanche.",
+        "conservation": "1 à 2 jours à température ambiante.",
+        "quiz": [
+          {
+            "question": "Combien de calories dans 100g de croissant ?",
+            "choices": [
+              "150 kcal",
+              "247 kcal",
+              "406 kcal"
+            ],
+            "correct": 2
+          },
+          {
+            "question": "Le croissant est-il riche en fibres ?",
+            "choices": [
+              "Oui très riche",
+              "Non très pauvre",
+              "Autant que le pain"
+            ],
+            "correct": 1
+          }
+        ]
+      }
+    }
+  ]
+}

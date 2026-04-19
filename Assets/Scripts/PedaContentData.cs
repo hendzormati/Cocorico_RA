@@ -13,18 +13,32 @@ public class FoodData
 {
     public string nom;
     public string emoji;
-    public string origine;
+    public string categorie;
+
+    public string type;
+    public string nutriscore;
+
     public string calories;
-    public string proteines;
-    public string glucides;
+    public string sucres;
+    public string fibres;
+    public string additifs;
+
+    public string message_court;
+    public string origine;
     public string conservation;
+
     public List<QuizQuestion> quiz;
 }
 
 [System.Serializable]
 public class FoodDatabase
 {
-    public FoodData tomate;
-    public FoodData banane;
-    public FoodData brocoli;
+    public List<FoodEntry> foods;
+}
+
+[System.Serializable]
+public class FoodEntry
+{
+    public string id;
+    public FoodData data;
 }
