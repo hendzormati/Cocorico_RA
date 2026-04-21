@@ -20,7 +20,9 @@ public class ModeManager : MonoBehaviour
     public GameObject panelModeSelection;
     public GameObject hamburgerButton;
     public GameObject panelSideMenu;
-
+    
+    [Header("Mode 2")]
+    public BarcodeScanner barcodeScanner;
     void Start()
     {
         
@@ -59,6 +61,18 @@ public class ModeManager : MonoBehaviour
         canvasMode1.SetActive(CurrentMode == AppMode.FruitsVeggies);
         canvasMode2.SetActive(CurrentMode == AppMode.Barcode);
         canvasMode3.SetActive(CurrentMode == AppMode.ImageTracking);
+        
+        if (barcodeScanner != null)
+{
+    if (CurrentMode == AppMode.Barcode)
+    {
+        barcodeScanner.gameObject.SetActive(true);
+    }
+    else
+    {
+        barcodeScanner.gameObject.SetActive(false);
+    }
+}
     }
 
     public void ToggleSideMenu()
