@@ -38,6 +38,30 @@ Le seul mode entièrement fonctionnel dans cette version beta.
 8. Clique **"Faire le quiz"** pour tester tes connaissances
 9. Compare ton score avant / après sur la fiche papier
 
+### Mode actif - Barcode Scanner (Open Food Facts)
+
+Nouveau mode en version beta permettant de scanner des produits en temps réel.
+
+**Comment l'utiliser :**
+1. Lance l'application sur ton téléphone Android
+2. Clique sur **"Barcode Scanner"** dans le menu principal
+3. Autorise l'accès à la caméra si demandé
+4. Pointez la caméra vers un code-barres de produit alimentaire
+5. Attends la détection automatique du code
+6. L'application interroge l'API Open Food Facts
+7. Une fiche produit apparaît avec :
+   - Nom du produit
+   - Marque
+   - Nutri-Score (A → E)
+   - Calories
+   - Sucres, graisses, protéines
+   - Allergènes (si disponibles)
+8. Clique sur **"Scanner à nouveau"** pour analyser un autre produit
+
+⚠️ Remarque :
+- Ce mode est en version beta
+- De légers ralentissements peuvent apparaître lors des mouvements rapides de caméra
+- Une optimisation des performances est prévue dans une prochaine version (pipeline AR natif)
 ---
 
 ### Modes en développement
@@ -45,7 +69,6 @@ Le seul mode entièrement fonctionnel dans cette version beta.
 | Mode | Description | Statut |
 |------|-------------|--------|
 | Fruits & Légumes | Détection temps réel via YOLOv8 + Flask | En cours |
-| Code-barres | Scan EAN + Open Food Facts API | En cours |
 
 ---
 
@@ -77,7 +100,7 @@ Intelligence Artificielle (Mode 1 - en développement)
 ├── Flask / Python (serveur local)
 └── Communication HTTP JSON
 
-API Externe (Mode 2 - en développement)
+API Externe (Mode 2)
 └── Open Food Facts (gratuit, sans clé)
 
 Assets 3D
