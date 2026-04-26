@@ -28,6 +28,8 @@ public class FoodData
     public string conservation;
 
     public List<QuizQuestion> quiz;
+    internal string proteines;
+    internal string glucides;
 }
 
 [System.Serializable]

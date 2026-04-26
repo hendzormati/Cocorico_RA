@@ -1,0 +1,51 @@
+{
+  "foods": [
+    { "id": "apple", "data": { "nom": "Pomme", "calories": "52 kcal/100g", "proteines": "0.3g", "glucides": "14g", "fibres": "2.4g", "nutriscore": "A", "sucres": "10g", "additifs": "Aucun", "conservation": "4 à 6 semaines au frigo", "message_court": "Riche en fibres et vitamines", "type": "sain", "categorie": "Fruit" }},
+    
+    { "id": "banana", "data": { "nom": "Banane", "calories": "89 kcal/100g", "proteines": "1.1g", "glucides": "23g", "fibres": "2.6g", "nutriscore": "A", "sucres": "12g", "additifs": "Aucun", "conservation": "4 à 5 jours ambiant", "message_court": "Source d'énergie rapide", "type": "sain", "categorie": "Fruit" }},
+    
+    { "id": "cabbage", "data": { "nom": "Chou", "calories": "25 kcal/100g", "proteines": "1.3g", "glucides": "6g", "fibres": "2.5g", "nutriscore": "A", "sucres": "3g", "additifs": "Aucun", "conservation": "1 semaine au frigo", "message_court": "Riche en fibres et vitamine C", "type": "sain", "categorie": "Légume" }},
+    
+    { "id": "carrot", "data": { "nom": "Carotte", "calories": "41 kcal/100g", "proteines": "0.9g", "glucides": "10g", "fibres": "2.8g", "nutriscore": "A", "sucres": "4.7g", "additifs": "Aucun", "conservation": "2 à 3 semaines au frigo", "message_court": "Riche en bêta-carotène", "type": "sain", "categorie": "Légume" }},
+    
+    { "id": "cauliflower", "data": { "nom": "Chou-fleur", "calories": "25 kcal/100g", "proteines": "1.9g", "glucides": "5g", "fibres": "2g", "nutriscore": "A", "sucres": "2g", "additifs": "Aucun", "conservation": "4 à 7 jours au frigo", "message_court": "Faible en calories", "type": "sain", "categorie": "Légume" }},
+    
+    { "id": "corn", "data": { "nom": "Maïs", "calories": "86 kcal/100g", "proteines": "3.2g", "glucides": "19g", "fibres": "2.7g", "nutriscore": "B", "sucres": "6g", "additifs": "Aucun", "conservation": "2 à 3 jours au frigo", "message_court": "Source d'énergie végétale", "type": "sain", "categorie": "Légume" }},
+    
+    { "id": "cucumber", "data": { "nom": "Concombre", "calories": "16 kcal/100g", "proteines": "0.7g", "glucides": "3.6g", "fibres": "0.5g", "nutriscore": "A", "sucres": "1.7g", "additifs": "Aucun", "conservation": "1 semaine au frigo", "message_court": "Très hydratant", "type": "sain", "categorie": "Légume" }},
+    
+    { "id": "eggplant", "data": { "nom": "Aubergine", "calories": "25 kcal/100g", "proteines": "1g", "glucides": "6g", "fibres": "3g", "nutriscore": "A", "sucres": "3.5g", "additifs": "Aucun", "conservation": "4 à 5 jours", "message_court": "Riche en fibres", "type": "sain", "categorie": "Légume" }},
+    
+    { "id": "garlic", "data": { "nom": "Ail", "calories": "149 kcal/100g", "proteines": "6.4g", "glucides": "33g", "fibres": "2.1g", "nutriscore": "B", "sucres": "1g", "additifs": "Aucun", "conservation": "Plusieurs semaines", "message_court": "Puissant antibactérien naturel", "type": "sain", "categorie": "Légume" }},
+    
+    { "id": "ginger", "data": { "nom": "Gingembre", "calories": "80 kcal/100g", "proteines": "1.8g", "glucides": "18g", "fibres": "2g", "nutriscore": "A", "sucres": "1.7g", "additifs": "Aucun", "conservation": "2 à 3 semaines", "message_court": "Anti-inflammatoire naturel", "type": "sain", "categorie": "Légume" }},
+    
+    { "id": "grapes", "data": { "nom": "Raisin", "calories": "69 kcal/100g", "proteines": "0.7g", "glucides": "18g", "fibres": "0.9g", "nutriscore": "B", "sucres": "15g", "additifs": "Aucun", "conservation": "1 semaine au frigo", "message_court": "Riche en antioxydants", "type": "sain", "categorie": "Fruit" }},
+    
+    { "id": "kiwi", "data": { "nom": "Kiwi", "calories": "61 kcal/100g", "proteines": "1.1g", "glucides": "15g", "fibres": "3g", "nutriscore": "A", "sucres": "9g", "additifs": "Aucun", "conservation": "1 semaine", "message_court": "Très riche en vitamine C", "type": "sain", "categorie": "Fruit" }},
+    
+    { "id": "lemon", "data": { "nom": "Citron", "calories": "29 kcal/100g", "proteines": "1.1g", "glucides": "9g", "fibres": "2.8g", "nutriscore": "A", "sucres": "2.5g", "additifs": "Aucun", "conservation": "2 semaines", "message_court": "Très riche en vitamine C", "type": "sain", "categorie": "Fruit" }},
+    
+    { "id": "lettuce", "data": { "nom": "Laitue", "calories": "15 kcal/100g", "proteines": "1.4g", "glucides": "2.9g", "fibres": "1.3g", "nutriscore": "A", "sucres": "1g", "additifs": "Aucun", "conservation": "3 à 5 jours", "message_court": "Très faible en calories", "type": "sain", "categorie": "Légume" }},
+    
+    { "id": "onion", "data": { "nom": "Oignon", "calories": "40 kcal/100g", "proteines": "1.1g", "glucides": "9g", "fibres": "1.7g", "nutriscore": "A", "sucres": "4g", "additifs": "Aucun", "conservation": "2 à 3 semaines", "message_court": "Riche en antioxydants", "type": "sain", "categorie": "Légume" }},
+    
+    { "id": "orange", "data": { "nom": "Orange", "calories": "47 kcal/100g", "proteines": "0.9g", "glucides": "12g", "fibres": "2.4g", "nutriscore": "A", "sucres": "9g", "additifs": "Aucun", "conservation": "2 à 3 semaines", "message_court": "Source de vitamine C", "type": "sain", "categorie": "Fruit" }},
+    
+    { "id": "pear", "data": { "nom": "Poire", "calories": "57 kcal/100g", "proteines": "0.4g", "glucides": "15g", "fibres": "3.1g", "nutriscore": "A", "sucres": "10g", "additifs": "Aucun", "conservation": "1 semaine", "message_court": "Riche en fibres", "type": "sain", "categorie": "Fruit" }},
+    
+    { "id": "peas", "data": { "nom": "Petits pois", "calories": "81 kcal/100g", "proteines": "5.4g", "glucides": "14g", "fibres": "5g", "nutriscore": "A", "sucres": "6g", "additifs": "Aucun", "conservation": "3 à 5 jours", "message_court": "Riche en protéines végétales", "type": "sain", "categorie": "Légume" }},
+    
+    { "id": "pepper", "data": { "nom": "Poivron", "calories": "20 kcal/100g", "proteines": "0.9g", "glucides": "4.6g", "fibres": "1.7g", "nutriscore": "A", "sucres": "2.4g", "additifs": "Aucun", "conservation": "1 semaine", "message_court": "Très riche en vitamine C", "type": "sain", "categorie": "Légume" }},
+    
+    { "id": "pomegranate", "data": { "nom": "Grenade", "calories": "83 kcal/100g", "proteines": "1.7g", "glucides": "19g", "fibres": "4g", "nutriscore": "A", "sucres": "14g", "additifs": "Aucun", "conservation": "2 semaines", "message_court": "Riche en antioxydants", "type": "sain", "categorie": "Fruit" }},
+    
+    { "id": "potato", "data": { "nom": "Pomme de terre", "calories": "77 kcal/100g", "proteines": "2g", "glucides": "17g", "fibres": "2.2g", "nutriscore": "B", "sucres": "0.8g", "additifs": "Aucun", "conservation": "2 à 3 semaines", "message_court": "Source d'énergie", "type": "sain", "categorie": "Légume" }},
+    
+    { "id": "spinach", "data": { "nom": "Épinard", "calories": "23 kcal/100g", "proteines": "2.9g", "glucides": "3.6g", "fibres": "2.2g", "nutriscore": "A", "sucres": "0.4g", "additifs": "Aucun", "conservation": "3 à 5 jours", "message_court": "Riche en fer", "type": "sain", "categorie": "Légume" }},
+    
+    { "id": "tomato", "data": { "nom": "Tomate", "calories": "18 kcal/100g", "proteines": "0.9g", "glucides": "3.9g", "fibres": "1.2g", "nutriscore": "A", "sucres": "2.6g", "additifs": "Aucun", "conservation": "5 à 7 jours", "message_court": "Riche en lycopène", "type": "sain", "categorie": "Légume" }},
+    
+    { "id": "watermelon", "data": { "nom": "Pastèque", "calories": "30 kcal/100g", "proteines": "0.6g", "glucides": "8g", "fibres": "0.4g", "nutriscore": "A", "sucres": "6g", "additifs": "Aucun", "conservation": "3 à 5 jours", "message_court": "Très hydratante", "type": "sain", "categorie": "Fruit" }}
+  ]
+}
